@@ -995,15 +995,20 @@
   pointer-events: none;
 }
 
-/* Improved modal body for zooming */
+/* Improved modal body for zooming and dragging */
 
 .modal-body {
   cursor: grab;
-  overflow: auto;
+  overflow: hidden; /* Hide overflow when dragging */
+  user-select: none; /* Prevent text selection during drag */
 }
 
-.modal-body:active {
+.modal-body.dragging {
   cursor: grabbing;
+}
+
+.modal-body.dragging * {
+  pointer-events: none; /* Prevent interference during drag */
 }
 
 /* Better scrollbars for modal */

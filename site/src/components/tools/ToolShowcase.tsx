@@ -34,7 +34,7 @@ export default function ToolShowcase({
     <div
       className={`flex flex-col ${
         reverse ? 'md:flex-row-reverse' : 'md:flex-row'
-      } gap-12 items-center`}
+      } gap-3xl items-center`}
     >
       {/* Image/Icon */}
       <ScrollReveal
@@ -45,7 +45,11 @@ export default function ToolShowcase({
           <motion.div
             whileHover={{ scale: 1.05, rotate: 2 }}
             transition={{ duration: 0.3 }}
-            className="w-full h-full rounded-3xl overflow-hidden shadow-2xl"
+            className="w-full h-full overflow-hidden"
+            style={{
+              boxShadow: 'var(--shadow-xl)',
+              borderRadius: 0,
+            }}
           >
             {imageUrl ? (
               <img
@@ -54,11 +58,32 @@ export default function ToolShowcase({
                 className="w-full h-full object-cover"
               />
             ) : (
-              <div className="w-full h-full bg-gradient-to-br from-accent to-accent-purple flex items-center justify-center">
-                <span className="text-8xl font-bold text-white opacity-90">{name[0]}</span>
+              <div
+                className="w-full h-full flex items-center justify-center"
+                style={{
+                  background: 'var(--md-gradient-sky)',
+                }}
+              >
+                <span
+                  className="text-8xl font-bold opacity-90"
+                  style={{ color: 'var(--md-white)' }}
+                >
+                  {name[0]}
+                </span>
               </div>
             )}
           </motion.div>
+
+          {/* 装饰性渐变 */}
+          <div
+            className="absolute -inset-4 opacity-30 blur-2xl -z-10"
+            style={{
+              background: reverse
+                ? 'var(--md-gradient-primary)'
+                : 'var(--md-gradient-sky)',
+              borderRadius: 0,
+            }}
+          />
         </div>
       </ScrollReveal>
 
@@ -67,46 +92,120 @@ export default function ToolShowcase({
         animation={reverse ? 'slideInLeft' : 'slideInRight'}
         className="flex-1"
       >
-        <div className="space-y-6">
-          <div>
-            <h2 className="text-3xl md:text-4xl font-bold text-primary mb-2">
+        <div>
+          <div style={{ marginBottom: 'var(--space-lg)' }}>
+            <h2
+              className="text-h1 font-bold"
+              style={{
+                background: reverse
+                  ? 'var(--md-gradient-primary)'
+                  : 'var(--md-gradient-sky)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+                marginTop: 0,
+                marginBottom: 'var(--space-sm)',
+              }}
+            >
               {name}
             </h2>
-            <p className="text-xl text-accent mb-4">{tagline}</p>
-            <p className="text-text-secondary text-lg">{description}</p>
+
+            <p
+              className="text-h3"
+              style={{
+                color: 'var(--md-sky)',
+                marginTop: 0,
+                marginBottom: 'var(--space-md)',
+                lineHeight: 'var(--line-height-body)',
+              }}
+            >
+              {tagline}
+            </p>
+
+            <p
+              className="text-body"
+              style={{
+                color: 'var(--md-neutral-700)',
+                marginTop: 0,
+                marginBottom: 0,
+                lineHeight: 'var(--line-height-body)',
+              }}
+            >
+              {description}
+            </p>
           </div>
 
           {/* Features */}
-          <div className="space-y-4">
-            <h3 className="font-semibold text-primary">核心功能：</h3>
+          <div style={{ marginBottom: 'var(--space-lg)' }}>
+            <h3
+              className="font-semibold text-body"
+              style={{
+                color: 'var(--md-neutral-900)',
+                marginTop: 0,
+                marginBottom: 'var(--space-md)',
+              }}
+            >
+              核心功能：
+            </h3>
+
             {features.map((feature, index) => (
-              <motion.div
+              <div
                 key={index}
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="flex gap-3"
+                style={{
+                  marginBottom: index < features.length - 1 ? 'var(--space-md)' : 0,
+                }}
               >
-                <span className="text-2xl">{feature.icon}</span>
-                <div className="flex-1">
-                  <h4 className="font-semibold text-primary mb-1">
-                    {feature.title}
-                  </h4>
-                  <p className="text-sm text-text-secondary">{feature.description}</p>
-                </div>
-              </motion.div>
+                <motion.div
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                  className="flex p-md transition-all duration-200 hover:translate-x-2"
+                  style={{
+                    backgroundColor: 'rgba(111, 194, 255, 0.05)',
+                    borderRadius: 0,
+                    gap: 'var(--space-md)',
+                  }}
+                >
+                  <span className="text-2xl">{feature.icon}</span>
+                  <div className="flex-1">
+                    <h4
+                      className="font-semibold text-body"
+                      style={{
+                        color: 'var(--md-neutral-900)',
+                        marginTop: 0,
+                        marginBottom: 'var(--space-xs)',
+                      }}
+                    >
+                      {feature.title}
+                    </h4>
+                    <p
+                      className="text-small"
+                      style={{
+                        color: 'var(--md-neutral-700)',
+                        marginTop: 0,
+                        marginBottom: 0,
+                        lineHeight: 'var(--line-height-body)',
+                      }}
+                    >
+                      {feature.description}
+                    </p>
+                  </div>
+                </motion.div>
+              </div>
             ))}
           </div>
 
           {/* CTA */}
-          <a
-            href={href || getUrl(`tools/${id}`)}
-            className="inline-flex items-center gap-2 text-accent font-medium hover:gap-3 transition-all group"
-          >
-            <span>深入了解</span>
-            <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
-          </a>
+          <div style={{ marginTop: 'var(--space-lg)' }}>
+            <a
+              href={href || getUrl(`tools/${id}`)}
+              className="btn-secondary inline-flex"
+            >
+              <span>深入了解</span>
+              <ArrowRight size={16} />
+            </a>
+          </div>
         </div>
       </ScrollReveal>
     </div>

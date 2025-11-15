@@ -85,50 +85,51 @@ const materials = [
     <a href={getUrl("curriculum")} class="btn-secondary">返回课程</a>
   </PageHeader>
 
-  <section id="materials" class="py-24 bg-bg-primary">
+  <section id="materials" class="section" style="background-color: var(--md-white);">
     <div class="container-custom">
       <ScrollReveal client:load>
-        <div class="text-center mb-16">
-          <h2 class="text-3xl md:text-4xl font-bold text-primary mb-4">
+        <div class="text-center mb-2xl">
+          <h2 class="text-h1 font-bold mb-md" style="color: var(--md-neutral-900);">
             精选学习资料
           </h2>
-          <p class="text-text-secondary max-w-2xl mx-auto">
+          <p class="max-w-2xl mx-auto" style="color: var(--md-neutral-700);">
             深度技术文章、架构分析、工具对比，助你全面掌握 AI 辅助编程
           </p>
         </div>
       </ScrollReveal>
 
-      <div class="space-y-16">
+      <div class="space-y-3xl">
         {
           materials.map((category, idx) => (
             <ScrollReveal delay={idx * 0.1} client:load>
               <div>
-                <div class="flex items-center gap-3 mb-6">
-                  <category.icon size={32} className="text-accent" />
+                <div class="flex items-center gap-md mb-lg">
+                  <category.icon size={32} className="text-sky" style={{ color: 'var(--md-sky)' }} />
                   <div>
-                    <h3 class="text-2xl font-bold text-primary">
+                    <h3 class="text-h2 font-bold" style="color: var(--md-neutral-900);">
                       {category.category}
                     </h3>
-                    <p class="text-text-secondary">{category.description}</p>
+                    <p style="color: var(--md-neutral-700);">{category.description}</p>
                   </div>
                 </div>
 
                 {category.items.length > 0 ? (
-                  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-lg">
                     {category.items.map((item) => (
                       <a
                         href={item.href}
-                        class="block p-6 bg-white rounded-xl hover:shadow-lg transition-all group"
+                        class="md-card md-card-interactive group"
+                        style="padding: var(--space-lg);"
                       >
-                        <h4 class="text-xl font-bold text-primary mb-2 group-hover:text-accent transition-colors">
+                        <h4 class="text-h3 font-bold mb-sm group-hover:text-sky transition-colors" style="color: var(--md-neutral-900);">
                           {item.title}
                         </h4>
-                        <p class="text-text-secondary mb-4">
+                        <p class="mb-md" style="color: var(--md-neutral-700);">
                           {item.description}
                         </p>
-                        <div class="flex flex-wrap gap-2">
+                        <div class="flex flex-wrap gap-sm">
                           {item.tags.map((tag) => (
-                            <span class="px-3 py-1 bg-bg-secondary text-xs font-medium rounded-full">
+                            <span class="md-badge md-badge-sky" style="font-size: var(--font-tiny);">
                               {tag}
                             </span>
                           ))}
@@ -137,7 +138,7 @@ const materials = [
                     ))}
                   </div>
                 ) : (
-                  <div class="p-8 bg-bg-secondary rounded-xl text-center text-text-secondary">
+                  <div class="md-card text-center" style="padding: var(--space-xl); background-color: var(--md-neutral-100); color: var(--md-neutral-700);">
                     即将推出更多精彩内容...
                   </div>
                 )}
@@ -149,16 +150,16 @@ const materials = [
     </div>
   </section>
 
-  <section class="py-24 bg-bg-secondary">
+  <section class="section" style="background-color: var(--md-neutral-100);">
     <div class="container-custom text-center">
       <ScrollReveal client:load>
-        <h2 class="text-3xl md:text-4xl font-bold text-primary mb-8">
+        <h2 class="text-h1 font-bold mb-xl" style="color: var(--md-neutral-900);">
           学以致用
         </h2>
-        <p class="text-xl text-text-secondary mb-8 max-w-2xl mx-auto">
+        <p class="text-h3 mb-xl max-w-2xl mx-auto" style="color: var(--md-neutral-700);">
           理论结合实践，在课程和项目中应用所学知识
         </p>
-        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <div class="flex flex-col sm:flex-row gap-md justify-center">
           <a href={getUrl("curriculum")} class="btn-primary"> 开始学习课程 </a>
           <a href={getUrl("projects")} class="btn-secondary"> 查看实战项目 </a>
         </div>

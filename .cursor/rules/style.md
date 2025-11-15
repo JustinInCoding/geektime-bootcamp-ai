@@ -8,7 +8,7 @@ alwaysApply: false
 
 ## Brand Voice
 
-- Embrace a playful-yet-professional tone: vibrant colors, rounded geometry, duck mascots for delight.
+- Embrace a playful-yet-professional tone: vibrant colors, sharp corners (no rounded geometry), duck mascots for delight.
 - Prioritize clarity and friendliness over minimalism; avoid stark monochrome looks.
 - Reserve illustrated ducks or Lottie animations for hero areas, empty states, and loading indicators.
 
@@ -25,6 +25,7 @@ alwaysApply: false
   --md-neutral-300: #B9B9B9;  /* borders, dividers */
   --md-neutral-100: #F3F3F3;  /* page background */
   --md-white: #FFFFFF;        /* cards, reverse text */
+  --md-black: #000000;        /* bold borders */
   --md-gradient-primary: linear-gradient(135deg, #FF7169 0%, #FFDE02 100%);
   --md-gradient-sky: linear-gradient(135deg, #6FC2FF 0%, #16AA98 100%);
 }
@@ -32,6 +33,7 @@ alwaysApply: false
 
 - Keep contrast ≥ 4.5:1 for body text; darken saturation by 10% on hover/focus.
 - Never mix new brand colors without approval; derive tints via opacity instead.
+- **Page background MUST be `#F3F3F3` (--md-neutral-100)**.
 
 ## Typography
 
@@ -69,23 +71,23 @@ font-family-mono: "Aeonik Mono", "SFMono-Regular", Menlo, monospace;
 - Section rhythm: 96px vertical gaps, 48px between content blocks, 24px between related elements.
 - Container max-width 1280px; paddings 24px (mobile) / 48px (desktop).
 - Grid defaults: 12 columns, 24px gutters, breakpoints at 640px and 1024px.
+- **Consistent spacing**: Use spacing tokens consistently. Avoid arbitrary values.
 
 ## Shape Language
 
 ```css
---radius-sm: 4px;
---radius-md: 8px;
---radius-lg: 16px;
---radius-xl: 24px;
---radius-full: 9999px;
+--border-thin: 1px solid var(--md-neutral-300);  /* default card borders */
+--border-bold: 3px solid var(--md-black);          /* emphasis borders */
 --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
 --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
 --shadow-lg: 0 10px 20px rgba(0, 0, 0, 0.15);
 --shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.2);
 ```
 
-- Default card treatment: white background, 16px radius, 32px padding, subtle border `1px solid var(--md-neutral-100)`, `--shadow-md`.
-- Use pill buttons (`--radius-full`) for primary CTAs only; secondary buttons can reuse 9999px radius but must be outlined.
+- **NO rounded corners**: All elements use `border-radius: 0` or no border-radius.
+- Default card treatment: white background, **no border-radius**, 32px padding, thin border `1px solid var(--md-neutral-300)`, `--shadow-md`.
+- **Bold borders**: Use `3px solid var(--md-black)` for emphasis (e.g., highlighted cards, important sections).
+- Buttons: **No rounded corners**; use sharp rectangular shapes with `border-radius: 0`.
 
 ## Components
 
@@ -96,7 +98,8 @@ font-family-mono: "Aeonik Mono", "SFMono-Regular", Menlo, monospace;
   background: var(--md-watermelon);
   color: var(--md-white);
   padding: 12px 24px;
-  border-radius: var(--radius-full);
+  border-radius: 0;
+  border: none;
   font-weight: 600;
   transition: all 0.3s ease;
 }
@@ -106,19 +109,20 @@ font-family-mono: "Aeonik Mono", "SFMono-Regular", Menlo, monospace;
   color: var(--md-sky);
   border: 2px solid var(--md-sky);
   padding: 10px 22px;
-  border-radius: var(--radius-full);
+  border-radius: 0;
 }
 ```
 
 - Hover state: translateY(-2px) and deepen color by ~10%.
 - Focus state: add `0 0 0 3px rgba(111, 194, 255, 0.2)` ring.
+- **No rounded corners** on any buttons.
 
 ### Inputs
 
 ```css
 .md-input {
   border: 1px solid var(--md-neutral-300);
-  border-radius: var(--radius-md);
+  border-radius: 0;
   padding: 12px 16px;
   background: var(--md-white);
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
@@ -132,12 +136,15 @@ font-family-mono: "Aeonik Mono", "SFMono-Regular", Menlo, monospace;
 ```
 
 - Error state uses `var(--md-watermelon)` border plus subtle shake animation ≤ 250ms.
+- **No rounded corners**.
 
 ### Cards & Surfaces
 
 - Layout cards with `display: flex` or `grid` to keep internal spacing consistent.
 - Elevate interactive cards on hover: apply `--shadow-lg` and `transform: translateY(-4px)`.
 - Always include generous white space and optionally a corner badge using `--md-sun`.
+- **Default card**: white background, **no border-radius**, `1px solid var(--md-neutral-300)` border, 32px padding.
+- **Bold border cards**: Use `3px solid var(--md-black)` for emphasis (e.g., highlighted/featured cards).
 
 ## Motion & Interaction
 
@@ -162,14 +169,23 @@ font-family-mono: "Aeonik Mono", "SFMono-Regular", Menlo, monospace;
 - ✅ Lean into bold gradients for hero backgrounds and CTA strips.
 - ✅ Mix bright accents with ample neutral whitespace to avoid visual fatigue.
 - ✅ Keep interactive affordances obvious via color, motion, and shadows.
+- ✅ Use **sharp corners** everywhere - no rounded elements.
+- ✅ Use **bold black borders (3px)** for emphasis.
+- ✅ Ensure page background is `#F3F3F3`.
 - ❌ Introduce new color families (purple, deep blue, grayscale-heavy) without design approval.
-- ❌ Use sharp corners or thin (≤1px) fonts for key CTAs.
+- ❌ Use rounded corners or border-radius anywhere.
+- ❌ Use thin borders for emphasis - use bold black borders instead.
 - ❌ Overuse animation; keep durations ≤ 400ms and ease-in-out curves.
+- ❌ Use arbitrary spacing values - always use spacing tokens.
 
 ## Implementation Checklist
 
 1. Define tokens in a central `design-tokens.css` (or theme provider) once.
 2. Import tokens into Astro/React layers; never hardcode hex values outside token definitions.
-3. Validate responsive behavior at 375px, 768px, and 1280px.
-4. Verify contrast ratios for new combinations before merge.
-5. Include duck-themed assets only if optimized (SVG/Lottie) and lazy-loaded.
+3. **Set all border-radius to 0** - no exceptions.
+4. **Use bold black borders (3px solid #000)** for emphasis.
+5. **Ensure page background is `#F3F3F3`**.
+6. **Use consistent spacing tokens** - check all padding/margin values.
+7. Validate responsive behavior at 375px, 768px, and 1280px.
+8. Verify contrast ratios for new combinations before merge.
+9. Include duck-themed assets only if optimized (SVG/Lottie) and lazy-loaded.

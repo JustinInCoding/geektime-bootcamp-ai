@@ -13,16 +13,16 @@ export default function Hero({
   title,
   subtitle,
   children,
-  backgroundClass = 'bg-gradient-to-b from-bg-primary to-bg-secondary',
+  backgroundClass = 'bg-gradient-hero',
   backgroundImage,
 }: HeroProps) {
   const sectionStyle = backgroundImage
     ? {
-      backgroundImage: `linear-gradient(to bottom, rgba(249, 250, 251, 0.5), rgba(243, 244, 246, 0.6)), url(${backgroundImage})`,
-      backgroundSize: 'cover',
-      backgroundPosition: 'center',
-      backgroundRepeat: 'no-repeat',
-    }
+        backgroundImage: `linear-gradient(135deg, rgba(255, 113, 105, 0.15) 0%, rgba(255, 222, 2, 0.15) 100%), url(${backgroundImage})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+      }
     : {};
 
   return (
@@ -30,34 +30,24 @@ export default function Hero({
       className={`min-h-screen flex items-center justify-center ${backgroundClass}`}
       style={sectionStyle}
     >
-      <style>{`
-        .hero-dark-overlay .btn-secondary {
-          color: white !important;
-          border-color: white !important;
-          background-color: transparent !important;
-        }
-        .hero-dark-overlay .btn-secondary:hover {
-          background-color: white !important;
-          color: rgba(0, 0, 0, 0.9) !important;
-          border-color: white !important;
-        }
-      `}</style>
-      <div className="container-custom text-center">
+      <div className="container-custom text-center py-4xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="hero-dark-overlay inline-block px-8 py-12 md:px-12 md:py-16 rounded-2xl backdrop-blur-md"
-          style={{
-            backgroundColor: 'rgba(0, 0, 0, 0.4)',
-            boxShadow: '0 8px 32px rgba(0, 0, 0, 0.2)',
-          }}
+          transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
         >
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-4xl md:text-6xl font-bold text-white mb-6"
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="text-hero font-bold"
+            style={{
+              background: 'linear-gradient(135deg, #FF7169 0%, #FFDE02 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+              marginBottom: 'var(--space-lg)',
+            }}
           >
             {title}
           </motion.h1>
@@ -67,7 +57,12 @@ export default function Hero({
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-xl md:text-2xl text-gray-100 mb-8 max-w-2xl mx-auto"
+              className="text-h3 max-w-3xl mx-auto"
+              style={{
+                color: 'var(--md-neutral-700)',
+                marginBottom: 'var(--space-2xl)',
+                lineHeight: 'var(--line-height-body)',
+              }}
             >
               {subtitle}
             </motion.p>
@@ -77,11 +72,45 @@ export default function Hero({
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="flex flex-wrap gap-md justify-center items-center"
             >
               {children}
             </motion.div>
           )}
+        </motion.div>
+
+        {/* 装饰性元素 */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 0.5 }}
+          className="absolute inset-0 pointer-events-none overflow-hidden"
+          style={{ zIndex: -1 }}
+        >
+          {/* 左上角装饰圆 */}
+          <div
+            className="absolute rounded-full blur-3xl"
+            style={{
+              top: '-10%',
+              left: '-5%',
+              width: '400px',
+              height: '400px',
+              background: 'radial-gradient(circle, rgba(111, 194, 255, 0.15) 0%, transparent 70%)',
+            }}
+          />
+
+          {/* 右下角装饰圆 */}
+          <div
+            className="absolute rounded-full blur-3xl"
+            style={{
+              bottom: '-10%',
+              right: '-5%',
+              width: '500px',
+              height: '500px',
+              background: 'radial-gradient(circle, rgba(255, 113, 105, 0.12) 0%, transparent 70%)',
+            }}
+          />
         </motion.div>
       </div>
     </section>

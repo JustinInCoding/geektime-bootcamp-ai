@@ -14,12 +14,12 @@ if (!weekData) {
   title={`第${weekData.weekNumber}周: ${weekData.title} - 陈天 AI 训练营`}
   description={weekData.subtitle}
 >
-  <div class="pt-24 pb-16 bg-bg-secondary">
+  <div class="section" style="background-color: var(--md-neutral-100); padding-top: var(--space-2xl); padding-bottom: var(--space-2xl);">
     <div class="container-custom">
       <WeekModule {...weekData} client:load />
 
-      <div class="flex justify-between items-center mt-12">
-        <a href={getUrl('curriculum')} class="text-accent hover:underline">
+      <div class="flex justify-between items-center" style="margin-top: var(--space-xl);">
+        <a href={getUrl('curriculum')} class="hover:underline" style="color: var(--md-sky); font-size: var(--font-body); line-height: var(--line-height-body);">
           ← 返回课程大纲
         </a>
         <a href={getUrl('curriculum/week-2')} class="btn-primary">

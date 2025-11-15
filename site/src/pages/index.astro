@@ -27,14 +27,14 @@ const featuredProjects = projects.slice(0, 3);
     </div>
   </Hero>
 
-  <section class="py-24 bg-bg-primary">
+  <section class="section" style="background-color: var(--md-white);">
     <div class="container-custom">
       <ScrollReveal client:load>
-        <h2 class="text-3xl md:text-4xl font-bold text-center text-primary mb-16">
+        <h2 class="text-h1 font-bold text-center" style="color: var(--md-neutral-900); margin-bottom: var(--space-2xl);">
           课程核心价值
         </h2>
       </ScrollReveal>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div class="grid grid-cols-1 md:grid-cols-3" style="gap: var(--space-2xl);">
         <FeatureCard
           icon="⚡"
           title="高效开发"
@@ -60,62 +60,62 @@ const featuredProjects = projects.slice(0, 3);
     </div>
   </section>
 
-  <section class="py-24 bg-bg-secondary">
+  <section class="section" style="background-color: var(--md-neutral-100);">
     <div class="container-custom text-center">
       <ScrollReveal client:load>
-        <h2 class="text-3xl md:text-4xl font-bold text-primary mb-8">
+        <h2 class="text-h1 font-bold" style="color: var(--md-neutral-900); margin-bottom: var(--space-xl);">
           学习收益
         </h2>
       </ScrollReveal>
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
+      <div class="grid grid-cols-2 md:grid-cols-4 max-w-4xl mx-auto" style="gap: var(--space-2xl);">
         <div>
-          <AnimatedNumber to={8} suffix=" 周" className="text-4xl md:text-5xl font-bold text-accent mb-2" client:load />
-          <div class="text-text-secondary">课程</div>
+          <AnimatedNumber to={8} suffix=" 周" className="text-h1 font-bold" style="color: var(--md-sky); margin-bottom: var(--space-sm);" client:load />
+          <div style="color: var(--md-neutral-700); line-height: var(--line-height-body);">课程</div>
         </div>
         <div>
-          <AnimatedNumber to={5} suffix=" 个" className="text-4xl md:text-5xl font-bold text-accent mb-2" client:load />
-          <div class="text-text-secondary">项目</div>
+          <AnimatedNumber to={5} suffix=" 个" className="text-h1 font-bold" style="color: var(--md-sky); margin-bottom: var(--space-sm);" client:load />
+          <div style="color: var(--md-neutral-700); line-height: var(--line-height-body);">项目</div>
         </div>
         <div>
-          <AnimatedNumber to={10} suffix="+" className="text-4xl md:text-5xl font-bold text-accent mb-2" client:load />
-          <div class="text-text-secondary">工具</div>
+          <AnimatedNumber to={10} suffix="+" className="text-h1 font-bold" style="color: var(--md-sky); margin-bottom: var(--space-sm);" client:load />
+          <div style="color: var(--md-neutral-700); line-height: var(--line-height-body);">工具</div>
         </div>
         <div>
-          <div class="text-4xl md:text-5xl font-bold text-accent mb-2">∞</div>
-          <div class="text-text-secondary">可能性</div>
+          <div class="text-h1 font-bold" style="color: var(--md-sky); margin-bottom: var(--space-sm);">∞</div>
+          <div style="color: var(--md-neutral-700); line-height: var(--line-height-body);">可能性</div>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="py-24 bg-bg-primary">
+  <section class="section" style="background-color: var(--md-white);">
     <div class="container-custom">
       <ScrollReveal client:load>
-        <h2 class="text-3xl md:text-4xl font-bold text-center text-primary mb-4">
+        <h2 class="text-h1 font-bold text-center" style="color: var(--md-neutral-900); margin-bottom: var(--space-md);">
           8周学习路径
         </h2>
-        <p class="text-center text-text-secondary mb-16 max-w-2xl mx-auto">
+        <p class="text-center max-w-2xl mx-auto" style="color: var(--md-neutral-700); margin-bottom: var(--space-2xl); line-height: var(--line-height-body);">
           系统化的课程设计，从 AI 编码入门到 Agent 开发精通
         </p>
       </ScrollReveal>
       <Timeline items={timelineData.slice(0, 4)} client:load />
-      <div class="text-center mt-12">
+      <div class="text-center" style="margin-top: var(--space-xl);">
         <a href={getUrl('curriculum')} class="btn-primary"> 查看完整课程大纲 </a>
       </div>
     </div>
   </section>
 
-  <section class="py-24 bg-bg-secondary">
+  <section class="section" style="background-color: var(--md-neutral-100);">
     <div class="container-custom">
       <ScrollReveal client:load>
-        <h2 class="text-3xl md:text-4xl font-bold text-center text-primary mb-4">
+        <h2 class="text-h1 font-bold text-center" style="color: var(--md-neutral-900); margin-bottom: var(--space-md);">
           实战项目
         </h2>
-        <p class="text-center text-text-secondary mb-16 max-w-2xl mx-auto">
+        <p class="text-center max-w-2xl mx-auto" style="color: var(--md-neutral-700); margin-bottom: var(--space-2xl); line-height: var(--line-height-body);">
           从简单到复杂，每个项目都对应特定的学习目标
         </p>
       </ScrollReveal>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+      <div class="grid grid-cols-1 md:grid-cols-3" style="gap: var(--space-2xl); margin-bottom: var(--space-xl);">
         {
           featuredProjects.map((project) => (
             <ProjectCard
@@ -136,62 +136,66 @@ const featuredProjects = projects.slice(0, 3);
     </div>
   </section>
 
-  <section class="py-24 bg-bg-primary">
+  <section class="section" style="background-color: var(--md-white);">
     <div class="container-custom">
       <ScrollReveal client:load>
-        <h2 class="text-3xl md:text-4xl font-bold text-center text-primary mb-4">
+        <h2 class="text-h1 font-bold text-center" style="color: var(--md-neutral-900); margin-bottom: var(--space-md);">
           学习资料
         </h2>
-        <p class="text-center text-text-secondary mb-16 max-w-2xl mx-auto">
+        <p class="text-center max-w-2xl mx-auto" style="color: var(--md-neutral-700); margin-bottom: var(--space-2xl); line-height: var(--line-height-body);">
           深度技术文章、架构分析、工具对比，全面掌握 AI 辅助编程
         </p>
       </ScrollReveal>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4" style="gap: var(--space-lg); margin-bottom: var(--space-lg);">
         <a
           href={getUrl('materials/claude-code-architecture')}
-          class="p-6 bg-white rounded-xl hover:shadow-lg transition-all group"
+          class="md-card md-card-interactive group"
+          style="padding: var(--space-lg);"
         >
-          <div class="text-4xl mb-3">🏗️</div>
-          <h4 class="text-lg font-bold text-primary mb-2 group-hover:text-accent">
+          <div class="text-4xl" style="margin-bottom: var(--space-md);">🏗️</div>
+          <h4 class="text-h3 font-bold group-hover:text-sky transition-colors" style="color: var(--md-neutral-900); margin-bottom: var(--space-sm);">
             Claude Code 架构
           </h4>
-          <p class="text-sm text-text-secondary">
+          <p class="text-small" style="color: var(--md-neutral-700); margin: 0; line-height: var(--line-height-body);">
             16个System Prompts深度分析
           </p>
         </a>
         <a
           href={getUrl('materials/speckit-intro')}
-          class="p-6 bg-white rounded-xl hover:shadow-lg transition-all group"
+          class="md-card md-card-interactive group"
+          style="padding: var(--space-lg);"
         >
-          <div class="text-4xl mb-3">💫</div>
-          <h4 class="text-lg font-bold text-primary mb-2 group-hover:text-accent">
+          <div class="text-4xl" style="margin-bottom: var(--space-md);">💫</div>
+          <h4 class="text-h3 font-bold group-hover:text-sky transition-colors" style="color: var(--md-neutral-900); margin-bottom: var(--space-sm);">
             SpecKit 完整指南
           </h4>
-          <p class="text-sm text-text-secondary">
+          <p class="text-small" style="color: var(--md-neutral-700); margin: 0; line-height: var(--line-height-body);">
             规范驱动开发从入门到精通
           </p>
         </a>
         <a
           href={getUrl('materials/notebooklm-guide')}
-          class="p-6 bg-white rounded-xl hover:shadow-lg transition-all group"
+          class="md-card md-card-interactive group"
+          style="padding: var(--space-lg);"
         >
-          <div class="text-4xl mb-3">📚</div>
-          <h4 class="text-lg font-bold text-primary mb-2 group-hover:text-accent">
+          <div class="text-4xl" style="margin-bottom: var(--space-md);">📚</div>
+          <h4 class="text-h3 font-bold group-hover:text-sky transition-colors" style="color: var(--md-neutral-900); margin-bottom: var(--space-sm);">
             NotebookLM 指南
           </h4>
-          <p class="text-sm text-text-secondary">
+          <p class="text-small" style="color: var(--md-neutral-700); margin: 0; line-height: var(--line-height-body);">
             1M上下文知识管理
           </p>
         </a>
         <a
           href={getUrl('materials/ai-coding-tools-comparison')}
-          class="p-6 bg-white rounded-xl hover:shadow-lg transition-all group"
+          class="md-card md-card-interactive group"
+          style="padding: var(--space-lg);"
         >
-          <div class="text-4xl mb-3">🔧</div>
-          <h4 class="text-lg font-bold text-primary mb-2 group-hover:text-accent">
+          <div class="text-4xl" style="margin-bottom: var(--space-md);">🔧</div>
+          <h4 class="text-h3 font-bold group-hover:text-sky transition-colors" style="color: var(--md-neutral-900); margin-bottom: var(--space-sm);">
             工具全景对比
           </h4>
-          <p class="text-sm text-text-secondary">
+          <p class="text-small" style="color: var(--md-neutral-700); margin: 0; line-height: var(--line-height-body);">
             Cursor vs Claude Code 深度分析
           </p>
         </a>
@@ -202,16 +206,16 @@ const featuredProjects = projects.slice(0, 3);
     </div>
   </section>
 
-  <section class="py-24 bg-bg-secondary">
+  <section class="section" style="background-color: var(--md-neutral-100);">
     <div class="container-custom text-center">
       <ScrollReveal client:load>
-        <h2 class="text-3xl md:text-4xl font-bold text-primary mb-8">
+        <h2 class="text-h1 font-bold" style="color: var(--md-neutral-900); margin-bottom: var(--space-xl);">
           准备好开始你的 AI 编程之旅了吗？
         </h2>
-        <p class="text-xl text-text-secondary mb-8 max-w-2xl mx-auto">
+        <p class="text-h3 max-w-2xl mx-auto" style="color: var(--md-neutral-700); margin-bottom: var(--space-xl); line-height: var(--line-height-body);">
           立即开始第一周课程，体验 AI 辅助编程的强大力量
         </p>
-        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <div class="flex flex-col sm:flex-row justify-center" style="gap: var(--space-md);">
           <a href={getUrl('curriculum/week-1')} class="btn-primary"> 开始第一周课程 </a>
           <a href={getUrl('about')} class="btn-secondary"> 了解课程详情 </a>
         </div>

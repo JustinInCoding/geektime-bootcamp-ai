@@ -177,7 +177,7 @@ class ObservabilityConfig(BaseSettings):
     log_level: Literal["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"] = Field(
         default="INFO", description="Logging level"
     )
-    log_format: Literal["json", "text"] = Field(default="json", description="Log format")
+    log_format: Literal["json", "text"] = Field(default="text", description="Log format")
 
 
 class Settings(BaseSettings):

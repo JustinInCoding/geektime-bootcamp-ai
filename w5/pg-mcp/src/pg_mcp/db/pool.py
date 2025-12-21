@@ -79,19 +79,42 @@ async def create_pools(configs: list[DatabaseConfig]) -> dict[str, Pool]:
     return pools
 
 
-async def close_pools(pools: dict[str, Pool]) -> None:
+async def close_pools(pools: dict[str, Pool], timeout: float = 10.0) -> None:
     """Close all connection pools gracefully.
 
     This function closes all pools and waits for all connections to be
-    released properly.
+    released properly. If graceful shutdown takes too long, it will
+    forcefully terminate the pools.
 
     Args:
         pools: Dictionary mapping database names to their pools.
+        timeout: Maximum time in seconds to wait for graceful shutdown
+            before forcing termination. Default: 10.0 seconds.
 
     Example:
         >>> pools = await create_pools(configs)
         >>> # ... use pools ...
-        >>> await close_pools(pools)
+        >>> await close_pools(pools, timeout=5.0)
     """
-    for pool in pools.values():
-        await pool.close()
+    import asyncio
+    import logging
+
+    logger = logging.getLogger(__name__)
+
+    for db_name, pool in pools.items():
+        try:
+            # Try graceful close with timeout
+            await asyncio.wait_for(pool.close(), timeout=timeout)
+            logger.info(f"Connection pool for '{db_name}' closed gracefully")
+        except asyncio.TimeoutError:
+            # Force termination if graceful close times out
+            logger.warning(
+                f"Graceful close timed out for '{db_name}', forcing termination"
+            )
+            pool.terminate()
+            logger.info(f"Connection pool for '{db_name}' terminated")
+        except Exception as e:
+            # Log error but continue closing other pools
+            logger.error(f"Error closing pool for '{db_name}': {e!s}")
+            # Force terminate on error
+            pool.terminate()

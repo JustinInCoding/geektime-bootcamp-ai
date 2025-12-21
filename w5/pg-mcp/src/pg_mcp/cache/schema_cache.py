@@ -159,7 +159,7 @@ class SchemaCache:
     async def stop_auto_refresh(self) -> None:
         """Stop automatic refresh task.
 
-        This method gracefully stops the background refresh task if running.
+        This method immediately cancels the background refresh task if running.
 
         Example:
             >>> await cache.stop_auto_refresh()
@@ -167,12 +167,12 @@ class SchemaCache:
         self._stop_refresh = True
 
         if self._refresh_task is not None and not self._refresh_task.done():
-            try:
-                await asyncio.wait_for(self._refresh_task, timeout=5.0)
-            except TimeoutError:
-                self._refresh_task.cancel()
-                with contextlib.suppress(asyncio.CancelledError):
-                    await self._refresh_task
+            # Immediately cancel the task
+            self._refresh_task.cancel()
+            # Wait for cancellation to complete
+            with contextlib.suppress(asyncio.CancelledError):
+                await self._refresh_task
+            logger.debug("Auto-refresh task cancelled")
 
     async def _auto_refresh_loop(
         self,

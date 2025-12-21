@@ -219,18 +219,25 @@ async def lifespan(_app: FastMCP) -> AsyncIterator[None]:  # type: ignore[type-a
         # Shutdown sequence
         logger.info("Starting PostgreSQL MCP Server shutdown...")
 
-        # Stop schema auto-refresh
+        # Stop schema auto-refresh with timeout
         if _schema_cache is not None:
             try:
-                await _schema_cache.stop_auto_refresh()
+                import asyncio
+                await asyncio.wait_for(
+                    _schema_cache.stop_auto_refresh(),
+                    timeout=3.0
+                )
                 logger.info("Schema auto-refresh stopped")
+            except asyncio.TimeoutError:
+                logger.warning("Schema auto-refresh stop timed out")
             except Exception as e:
                 logger.warning(f"Error stopping schema auto-refresh: {e!s}")
 
-        # Close database connection pools
+        # Close database connection pools with timeout
         if _pools is not None:
             try:
-                await close_pools(_pools)
+                # Use 5 second timeout for graceful shutdown
+                await close_pools(_pools, timeout=5.0)
                 logger.info("Database connection pools closed")
             except Exception as e:
                 logger.error(f"Error closing connection pools: {e!s}")
